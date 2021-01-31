@@ -11,13 +11,13 @@
     <!--<select id="dropdown-mobile" name="dropdown-mobile" th:field="*{prodCats}" onchange="sayhello()" style="text-decoration: none; color: black">-->
     <select id="dropdown-mobile" name="dropdown-mobile" onchange='location = this.value;' style="text-decoration: none; color: black">
         <option value="http://localhost:8080/productList?prodCat=-1" selected th:text="Select"></option>
-        <option value="http://localhost:8080/productList?prodCat=0" selected th:text="All"></option>
-        <option value="http://localhost:8080/productList?prodCat=1" th:text="Drone Parts"></option>
-        <option value="http://localhost:8080/productList?prodCat=2" th:text="Sensors"></option>
-        <option value="http://localhost:8080/productList?prodCat=3" th:text="Electronic Component"></option>
-        <option value="http://localhost:8080/productList?prodCat=4" th:text="Instuments and Tools"></option>
-        <option value="http://localhost:8080/productList?prodCat=5" th:text="Wires & Cable"></option>
-        <option value="http://localhost:8080/productList?prodCat=6" th:text="Motor Drivers & Actuator"></option>
+        <option value="http://localhost:8080/productList?prodCat=0" th:text="All"></option>
+        <option value="http://localhost:8080/productList?prodCat=1">Drone Parts</option>
+        <option value="http://localhost:8080/productList?prodCat=2">Sensors</option>
+        <option value="http://localhost:8080/productList?prodCat=3">Electronic Component</option>
+        <option value="http://localhost:8080/productList?prodCat=4">Instruments and Tools</option>
+        <option value="http://localhost:8080/productList?prodCat=5">Wires & Cable</option>
+        <option value="http://localhost:8080/productList?prodCat=6">Motor Drivers & Actuator</option>
         <!--<option th:each="prodCat : ${prodCats}" th:value="${prodCat.ID}" th:text="${prodCat.name}"></option>-->
     </select>
 

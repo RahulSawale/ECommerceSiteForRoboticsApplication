@@ -90,7 +90,7 @@ ALTER TABLE Product_Category
 INSERT INTO Product_Category VALUES (1, 'Drone Parts');
 INSERT INTO Product_Category VALUES (2, 'Sensors');
 INSERT INTO Product_Category VALUES (2, 'Electronic Component');
-INSERT INTO Product_Category VALUES (2, 'Instuments and Tools');
+INSERT INTO Product_Category VALUES (2, 'Instruments and Tools');
 INSERT INTO Product_Category VALUES (2, 'Wires & Cable');
 INSERT INTO Product_Category VALUES (2, 'Motor Drivers & Actuator');
 ##---  
