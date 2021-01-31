@@ -15,9 +15,11 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@ComponentScan({"controller","dao","validator","config","service"})
-@SpringBootApplication(exclude=HibernateJpaAutoConfiguration.class)
+@EnableSwagger2
+@ComponentScan({"controller", "dao", "validator", "config", "service"})
+@SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
 public class ECommerceSiteForRoboticsApplication {
 
     @Autowired

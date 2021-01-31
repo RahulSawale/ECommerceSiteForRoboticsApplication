@@ -1,9 +1,9 @@
 package controller;
 
-
 import dao.OrderDAO;
 import dao.ProductDAO;
 import entity.Product;
+import entity.ProductDetails;
 import form.CustomerForm;
 import java.io.IOException;
 
@@ -68,20 +68,34 @@ public class MainController {
     }
 
     @RequestMapping("/")
-    public String home() {
-        return "index";
+    public String home(Model model,
+            @RequestParam(value = "name", defaultValue = "") String likeName,
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "prodCat", defaultValue = "0") int prodCat,
+            @RequestParam(value = "code", required = false) String code
+    ) {
+        final int maxResult = 5;
+        final int maxNavigationPage = 10;
+
+        PaginationResult<ProductInfo> result = (PaginationResult<ProductInfo>) productDAO.queryProducts(page, //
+                maxResult, maxNavigationPage, likeName, prodCat, code);
+
+        model.addAttribute("paginationProducts", result);
+        return "productList";
     }
 
     // Product List
     @RequestMapping({"productList"})
     public String listProductHandler(Model model, //
             @RequestParam(value = "name", defaultValue = "") String likeName,
-            @RequestParam(value = "page", defaultValue = "1") int page) {
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "prodCat", defaultValue = "0") int prodCat,
+            @RequestParam(value = "code", required = false) String code) {
         final int maxResult = 5;
         final int maxNavigationPage = 10;
 
         PaginationResult<ProductInfo> result = (PaginationResult<ProductInfo>) productDAO.queryProducts(page, //
-                maxResult, maxNavigationPage, likeName);
+                maxResult, maxNavigationPage, likeName, prodCat, code);
 
         model.addAttribute("paginationProducts", result);
         return "productList";
@@ -92,15 +106,17 @@ public class MainController {
             @RequestParam(value = "code", defaultValue = "") String code) {
 
         Product product = null;
+        ProductDetails productDetails = null;
         if (code != null && code.length() > 0) {
             product = productDAO.findProduct(code);
+            productDetails = productDAO.findProductDetails(code);
         }
-        if (product != null) {
+        if (product != null && productDetails != null) {
 
             //
             CartInfo cartInfo = Utils.getCartInSession(request);
 
-            ProductInfo productInfo = new ProductInfo(product);
+            ProductInfo productInfo = new ProductInfo(product, productDetails);
 
             cartInfo.addProduct(productInfo, 1);
         }
@@ -112,14 +128,16 @@ public class MainController {
     public String removeProductHandler(HttpServletRequest request, Model model, //
             @RequestParam(value = "code", defaultValue = "") String code) {
         Product product = null;
+        ProductDetails productDetails = null;
         if (code != null && code.length() > 0) {
             product = productDAO.findProduct(code);
+            productDetails = productDAO.findProductDetails(code);
         }
-        if (product != null) {
+        if (product != null && productDetails != null) {
 
             CartInfo cartInfo = Utils.getCartInSession(request);
 
-            ProductInfo productInfo = new ProductInfo(product);
+            ProductInfo productInfo = new ProductInfo(product, productDetails);
 
             cartInfo.removeProduct(productInfo);
 
@@ -260,6 +278,22 @@ public class MainController {
             response.getOutputStream().write(product.getImage());
         }
         response.getOutputStream().close();
+    }
+
+    @RequestMapping(value = {"/productDetails"}, method = RequestMethod.GET)
+    public String productDetails(Model model,
+            @RequestParam(value = "name", defaultValue = "") String likeName,
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "prodCat", defaultValue = "0") int prodCat,
+            @RequestParam(value = "code", required = false) String code) {
+
+        final int maxResult = 5;
+        final int maxNavigationPage = 10;
+
+        PaginationResult<ProductInfo> result = (PaginationResult<ProductInfo>) productDAO.queryProducts(page, //
+                maxResult, maxNavigationPage, likeName, prodCat, code);
+        model.addAttribute("paginationProducts", result);
+        return "productDetails";
     }
 
 }

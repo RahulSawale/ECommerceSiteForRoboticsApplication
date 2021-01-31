@@ -1,6 +1,5 @@
 package entity;
 
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -36,8 +35,12 @@ public class Product implements Serializable {
     @Column(name = "Create_Date", nullable = false)
     private Date createDate;
 
-    public Product() {
-    }
+    @Column(name = "CATEGORY_ID", length = 20, nullable = false)
+    private String productCategory;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "CATEGORY_ID", nullable = false, //
+//            foreignKey = @ForeignKey(name = "Products_CAT_FK"))
+//    private ProductCategory productCategory;
 
     public String getCode() {
         return code;
@@ -63,6 +66,14 @@ public class Product implements Serializable {
         this.price = price;
     }
 
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
     public Date getCreateDate() {
         return createDate;
     }
@@ -71,12 +82,12 @@ public class Product implements Serializable {
         this.createDate = createDate;
     }
 
-    public byte[] getImage() {
-        return image;
+    public String getProductCategory() {
+        return productCategory;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
+    public void setProductCategory(String productCategory) {
+        this.productCategory = productCategory;
     }
 
 }

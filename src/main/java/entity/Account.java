@@ -1,13 +1,14 @@
 package entity;
 
-
 import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "Accounts")
 public class Account implements Serializable {
@@ -29,42 +30,14 @@ public class Account implements Serializable {
 
     @Column(name = "User_Role", length = 20, nullable = false)
     private String userRole;
+    
+    @Column(name = "FIRST_NAME", length = 20, nullable = false)
+    private String firstName;
 
-    public String getUserName() {
-        return userName;
-    }
+    @Column(name = "LAST_NAME", length = 20, nullable = false)
+    private String lastName;
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getEncrytedPassword() {
-        return encrytedPassword;
-    }
-
-    public void setEncrytedPassword(String encrytedPassword) {
-        this.encrytedPassword = encrytedPassword;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public String getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(String userRole) {
-        this.userRole = userRole;
-    }
-
-    @Override
-    public String toString() {
-        return "[" + this.userName + "," + this.encrytedPassword + "," + this.userRole + "]";
-    }
-
+    @Column(name = "USER_EMAIL", length = 55, nullable = false)
+    private String userEmail;
+   
 }
