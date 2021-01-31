@@ -89,10 +89,10 @@ ALTER TABLE Product_Category
 
 INSERT INTO Product_Category VALUES (1, 'Drone Parts');
 INSERT INTO Product_Category VALUES (2, 'Sensors');
-INSERT INTO Product_Category VALUES (2, 'Electronic Component');
-INSERT INTO Product_Category VALUES (2, 'Instruments and Tools');
-INSERT INTO Product_Category VALUES (2, 'Wires & Cable');
-INSERT INTO Product_Category VALUES (2, 'Motor Drivers & Actuator');
+INSERT INTO Product_Category VALUES (3, 'Electronic Component');
+INSERT INTO Product_Category VALUES (4, 'Instruments and Tools');
+INSERT INTO Product_Category VALUES (5, 'Wires & Cable');
+INSERT INTO Product_Category VALUES (6, 'Motor Drivers & Actuator');
 ##---  
 CREATE TABLE Product_Details (
     ID VARCHAR(50),

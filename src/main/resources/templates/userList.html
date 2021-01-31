@@ -17,7 +17,10 @@
                 <th>Last Name</th>
                 <th>User Email</th>
                 <th>User Role</th>
-                <th colspan="2">Action</th>
+                <th colspan="2">
+                    Action
+                    - &nbsp; <a style="text-decoration: none; color: red; text-align: left;" th:href="@{/admin/user}">Create User</a>
+                </th>
             </tr>
             <tr th:each="userInfo : ${paginationResult.list}">
                 <td th:utext="${userInfo.firstName}"></td>
