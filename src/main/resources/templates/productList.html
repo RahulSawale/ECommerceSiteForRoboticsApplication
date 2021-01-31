@@ -11,7 +11,7 @@
     <th:block th:include="/_menu"></th:block>
     <center>
         <div class="">Product List</div>
-
+        <div th:if="${errorMessage!= null}" class="error-message" th:utext="${errorMessage}"></div>
         <div class="product-preview-container" th:each="prodInfo : ${paginationProducts.list}">
             <ul>
                 <li><img class="product-image"

@@ -32,7 +32,7 @@ public class AdminController {
 
     @Autowired
     private ProductDAO productDAO;
-    
+
     @Autowired
     private AccountDAO accountDAO;
 
@@ -189,7 +189,7 @@ public class AdminController {
         accountDAO.deleteUser(userName);
         return "redirect:/admin/userList";
     }
-    
+
     @RequestMapping(value = {"/admin/userList"}, method = RequestMethod.GET)
     public String userList(Model model, //
             @RequestParam(value = "page", defaultValue = "1") String pageStr) {
@@ -207,7 +207,7 @@ public class AdminController {
         model.addAttribute("paginationResult", paginationResult);
         return "userList";
     }
-    
+
     @RequestMapping(value = {"/admin/order"}, method = RequestMethod.GET)
     public String orderView(Model model, @RequestParam("orderId") String orderId) {
         OrderInfo orderInfo = null;
@@ -227,8 +227,7 @@ public class AdminController {
 
     @RequestMapping(value = {"/admin/productDelete"}, method = RequestMethod.GET)
     public String productDelete(@RequestParam String code) {
-        productDAO.deleteProduct(code);
-        return "redirect:/productList";
+        return "redirect:/productList?message=" + productDAO.deleteProduct(code);
     }
 
 }

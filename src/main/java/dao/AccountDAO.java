@@ -56,6 +56,7 @@ public class AccountDAO {
         user.setUserEmail(userForm.getUserEmail());
         user.setUserRole(userForm.getUserRole());
         user.setActive(true);
+        user.setEncrytedPassword("$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu");
 
         if (isNewUser) {
             session.persist(user);

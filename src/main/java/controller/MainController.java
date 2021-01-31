@@ -90,7 +90,8 @@ public class MainController {
             @RequestParam(value = "name", defaultValue = "") String likeName,
             @RequestParam(value = "page", defaultValue = "1") int page,
             @RequestParam(value = "prodCat", defaultValue = "0") int prodCat,
-            @RequestParam(value = "code", required = false) String code) {
+            @RequestParam(value = "code", required = false) String code,
+            @RequestParam(value = "message", required = false, defaultValue = "") String message) {
         final int maxResult = 5;
         final int maxNavigationPage = 10;
 
@@ -98,6 +99,9 @@ public class MainController {
                 maxResult, maxNavigationPage, likeName, prodCat, code);
 
         model.addAttribute("paginationProducts", result);
+        if (!"".equalsIgnoreCase(message)) {
+            model.addAttribute("errorMessage", message);
+        }
         return "productList";
     }
 

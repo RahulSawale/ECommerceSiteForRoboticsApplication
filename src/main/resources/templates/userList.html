@@ -16,6 +16,7 @@
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>User Email</th>
+                <th>User Name</th>
                 <th>User Role</th>
                 <th colspan="2">
                     Action
@@ -26,6 +27,7 @@
                 <td th:utext="${userInfo.firstName}"></td>
                 <td th:utext="${userInfo.lastName}"></td>
                 <td th:utext="${userInfo.userEmail}"></td>
+                <td th:utext="${userInfo.userName}"></td>
                 <td th:utext="${userInfo.userRole}"></td>
                 <td><a style="color:red;" th:href="@{|/admin/user?userName=${userInfo.userName}|}">Edit User</a></td>
                 <td><a style="color:red;" th:href="@{|/admin/userDelete?userName=${userInfo.userName}|}">Delete User</a></td>

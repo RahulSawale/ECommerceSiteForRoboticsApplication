@@ -2,6 +2,7 @@ package dao;
 
 import entity.Product;
 import entity.ProductDetails;
+import entity.OrderDetail;
 import entity.ProductCategory;
 import form.ProductForm;
 import java.io.IOException;
@@ -47,6 +48,19 @@ public class ProductDAO {
             Query<ProductDetails> query = session.createQuery(sql, ProductDetails.class);
             query.setParameter("code", code);
             return (ProductDetails) query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public OrderDetail findOrderDetails(Product product) {
+        try {
+            String sql = "Select e from " + OrderDetail.class.getName() + " e Where e.product =:product ";
+
+            Session session = this.sessionFactory.getCurrentSession();
+            Query<OrderDetail> query = session.createQuery(sql, OrderDetail.class);
+            query.setParameter("product", product);
+            return (OrderDetail) query.getSingleResult();
         } catch (NoResultException e) {
             return null;
         }
@@ -158,15 +172,29 @@ public class ProductDAO {
         session.persist(productDetails);
         session.flush();
     }
-    
+
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
-    public void deleteProduct(String code){
+    public String deleteProduct(String code) {
+        String result = "";
         Session session = this.sessionFactory.getCurrentSession();
         Product product = null;
         if (code != null) {
             product = this.findProduct(code);
-            session.delete(product);
+            if (product != null) {
+                OrderDetail orderDetail = this.findOrderDetails(product);
+                if (orderDetail != null) {
+                    result = "Product '<b>"+ code +"</b>' is used in Order, Not allow to delete!!";
+                } else {
+                    session.delete(product);
+                    result = "Product '<b>"+ code +"</b>' Deleted Successfully!!";
+                }
+            } else {
+                result = "Product '<b>"+ code +"</b>' not found!!";
+            }
+        } else {
+            result = "Product Code '<b>"+ code +"</b>' not found!!";
         }
         session.flush();
+        return result;
     }
 }
